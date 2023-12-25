@@ -1,25 +1,26 @@
-import React, { useState, useContext } from 'react';
-import GoogleSignIn from './GoogleSignIn';
-import UserRegistrationForm from './UserRegistrationForm';
-import { UserContext } from '../context/UserContext';
+import React, { useState, useContext } from "react";
+import GoogleSignIn from "./GoogleSignIn";
+import UserRegistrationForm from "./UserRegistrationForm";
+import { UserContext } from "../context/UserContext";
+import ButtonHandle from "../components/ButtonHandle";
 
 function CardLogin() {
   const { user, login, logout } = useContext(UserContext);
   const [newUserInfo, setNewUserInfo] = useState(null);
 
   const handleNewUser = (userInfo) => {
-    console.log("funcion callback")
+    console.log("funcion callback");
     setNewUserInfo(userInfo); // Actualiza el estado con la información del nuevo usuario
   };
-  if(newUserInfo){
+  if (newUserInfo) {
     console.log("newUserInfo correcto");
   }
-  if(user){
+  if (user) {
     console.log("user correcto");
   }
 
   if (user && newUserInfo) {
-    console.log("se procede a mostrar el formulario user registration form")
+    console.log("se procede a mostrar el formulario user registration form");
     // Mostrar formulario de registro para nuevos usuarios
     return <UserRegistrationForm userInfo={newUserInfo} />;
   }
@@ -42,20 +43,23 @@ function CardLogin() {
         <div className="w-full h-[50px]">
           {/* Suponiendo que ButtonS es un componente para un botón */}
           {/* Reemplaza con la lógica adecuada para el inicio de sesión */}
-          <button type="button" onClick={login}>Ingresar</button>
+          {/* <button type="button" onClick={login}>Ingresar</button> */}
+          <ButtonHandle handle={login} title="Ingresar" />
         </div>
         <hr className="border-sombra-boton border-b-1 shadow-xl" />
-      <GoogleSignIn onNewUser={handleNewUser} />
+
+        <GoogleSignIn onNewUser={handleNewUser} />
         <p className="font-poppins font-light text-gray-400 text-[10px]">
-          Al registrarte en AIBert, aceptas nuestros Términos y Políticas de privacidad.
+          Al registrarte en AIBert, aceptas nuestros Términos y Políticas de
+          privacidad.
         </p>
       </form>
 
-      {user ? (
+      {/* {user ? (
         <button onClick={logout}>Logout</button>
       ) : (
         <button onClick={login}>Login</button>
-      )}
+      )} */}
     </div>
   );
 }
